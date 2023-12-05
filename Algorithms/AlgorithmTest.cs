@@ -10,6 +10,18 @@ namespace DeveloperSample.Algorithms
             Assert.Equal(24, Algorithms.GetFactorial(4));
         }
 
+        [Theory]
+        [InlineData(24, 4)]
+        [InlineData(3628800,10)]
+        [InlineData(120,5)]
+        [InlineData(720, 6)]
+        public void CanGetFactorial_Custom(int expected, int n)
+        {
+            Assert.Equal(expected, Algorithms.GetFactorial(n));
+        }
+
+
+
         [Fact]
         public void CanFormatSeparators()
         {
