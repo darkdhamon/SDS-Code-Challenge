@@ -12,11 +12,21 @@ namespace DeveloperSample.Syncing
         public List<string> InitializeList(IEnumerable<string> items)
         {
             var bag = new ConcurrentBag<string>();
+            var completedEvent = new CountdownEvent(items.Count());
             Parallel.ForEach(items, async i =>
             {
-                var r = await Task.Run(() => i).ConfigureAwait(false);
-                bag.Add(r);
+                try
+                {
+                    var r = await Task.Run(() => i).ConfigureAwait(false);
+                    bag.Add(r);
+                }
+                finally
+                {
+                    completedEvent.Signal();
+                }
             });
+            completedEvent.Wait();
+            
             var list = bag.ToList();
             return list;
         }
