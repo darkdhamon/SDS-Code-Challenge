@@ -9,6 +9,18 @@ namespace DeveloperSample.Syncing
 {
     public class SyncDebug
     {
+        /// <summary>
+        /// I was not sure how to do this, since this is not something I usually handle.
+        /// So I decided to use an AI to help me with creating as solution for this.
+        /// I knew the reason this was failing was due to the async code not getting awaited
+        /// properly but having never used Parallel before I needed help.
+        /// I initially was going to use google to research this issue but since I have been
+        /// experimenting with AI I decided to see what ChatGPT could come up with. here is a
+        /// link to my conversation with ChatGPT about this method.
+        /// https://chat.openai.com/share/0943adda-5a1f-467d-9b8b-024debdd4ff4
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public List<string> InitializeList(IEnumerable<string> items)
         {
             var bag = new ConcurrentBag<string>();
