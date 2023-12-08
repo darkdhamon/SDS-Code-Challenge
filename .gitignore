@@ -1,3 +1,4 @@
 .vs/
 bin/
 obj/
+/Frontend/login_app/node_modules
