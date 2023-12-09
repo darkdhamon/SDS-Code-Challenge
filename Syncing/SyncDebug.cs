@@ -28,7 +28,7 @@ namespace DeveloperSample.Syncing
             // remove possible multiple enumeration warning in case a IEnumerable that
             // can not be enumerated multiple times is passed in
             var enumerable = items.ToList(); 
-            var completedEvent = new CountdownEvent(enumerable.Count());
+            var completedEvent = new CountdownEvent(enumerable.Count);
             Parallel.ForEach(enumerable, async i =>
             {
                 try
@@ -67,7 +67,7 @@ namespace DeveloperSample.Syncing
             var itemsToInitialize = Enumerable.Range(0, 100).ToList();
 
             var concurrentDictionary = new ConcurrentDictionary<int, string>();
-            var numThreads = 3;
+            const int numThreads = 3;
             var threads = Enumerable.Range(0, numThreads)
                 .Select(threadID => new Thread(() =>
                 {
@@ -77,14 +77,14 @@ namespace DeveloperSample.Syncing
                         concurrentDictionary.AddOrUpdate(
                             item, 
                             getItem,
-                            (_, s) => s); 
-                        /// Unit Test Coverage says that this lambda in the UpdateValueFactory
-                        /// is untested. I do not known how to get this to be covered in UnitTest
-                        /// since I do not know when this lambda would be called, or what this
-                        /// lambda even does. As and educated guess, if the item already exist in
-                        /// the factory it would update instead of adding, but I dont know for
-                        /// sure. But for now... this means that my c# Unit Test coverage is stuck
-                        /// at 99% code coverage.
+                            (_, s) => s);
+                        // Unit Test Coverage says that this lambda in the UpdateValueFactory
+                        // is untested. I do not known how to get this to be covered in UnitTest
+                        // since I do not know when this lambda would be called, or what this
+                        // lambda even does. As and educated guess, if the item already exist in
+                        // the factory it would update instead of adding, but I dont know for
+                        // sure. But for now... this means that my c# Unit Test coverage is stuck
+                        // at 99% code coverage.
                     }
                 }))
                 .ToList();

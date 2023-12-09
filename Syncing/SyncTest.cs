@@ -20,11 +20,11 @@ namespace DeveloperSample.Syncing
         {
             var debug = new SyncDebug();
             var count = 0;
-            var dictionary = debug.InitializeDictionary(i =>
+            var dictionary = debug.InitializeDictionary(item =>
             {
                 Thread.Sleep(1);
                 Interlocked.Increment(ref count);
-                return i.ToString();
+                return item.ToString();
             });
 
             Assert.Equal(100, count);
