@@ -1,3 +1,4 @@
+using System;
 using DeveloperSample.ClassRefactoring.Model;
 using DeveloperSample.ClassRefactoring.Model.Enums;
 using Xunit;
@@ -35,5 +36,16 @@ namespace DeveloperSample.ClassRefactoring.Tests
             swallow.ApplyLoad(SwallowLoad.Coconut);
             Assert.Equal(16, swallow.GetAirspeedVelocity());
         }
+        
+        [Theory]
+        [InlineData(SwallowType.African)]
+        [InlineData(SwallowType.European)]
+        public void SwallowLadenWithUnknownLoad_Throws_InvalidOperationException(SwallowType swallowType)
+        {
+            var swallow = SwallowFactory.GetSwallow(swallowType);
+            swallow.ApplyLoad((SwallowLoad)(-1));
+            Assert.Throws<InvalidOperationException>(() => swallow.GetAirspeedVelocity());
+        }
+        
     }
 }
