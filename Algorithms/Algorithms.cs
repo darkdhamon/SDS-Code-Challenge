@@ -9,6 +9,7 @@ namespace DeveloperSample.Algorithms
         /// Used https://byjus.com/maths/factorial/ as a reference for what a factorial is.
         /// </summary>
         /// <param name="n"></param>
+        /// <exception cref="ArgumentOutOfRangeException">"Positive int required for Factorials"</exception>
         /// <returns></returns>
         public static int GetFactorial(int n)
         {
@@ -16,8 +17,10 @@ namespace DeveloperSample.Algorithms
             {
                 case < 0:
                     throw new ArgumentOutOfRangeException(nameof(n),"Positive int required for Factorials");
-                case 0:
-                    return 1; // According to the referenced link above 0! is 1, which my previous logic did not account for.
+                case 0 or 1:
+                    // According to the referenced link above 0! is 1, which my previous logic did not account for.
+                    // and 1 is the same as 0 so might as well skip the logical and mathematical calculations and return
+                    return 1; 
             }
 
             var result = 0;
@@ -32,7 +35,13 @@ namespace DeveloperSample.Algorithms
             }
             return result; 
         }
-
+        /// <summary>
+        /// I came up with 3 different ways to complete this task.
+        /// Option 1 passed the provided unit test but not the addition testing that I built
+        /// Option 2 and 3 pass all unit tests however option 2 uses less code and is more readable.
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public static string FormatSeparators(params string[] items)
         {
             //Idea 1) not very efficient and what if multiple items are the same?
