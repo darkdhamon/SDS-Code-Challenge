@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './LoginForm.css';
 
 /**
@@ -6,15 +6,18 @@ import './LoginForm.css';
  * Although it is not built like the ones I am finding on stackoverflow. I know that I
  * need to create a variables to bind the data too. So for now I will do this like I would
  * in standard JS and see what happens. 
+ * 
+ * #Update 20231209 I noticed there was an issue with the login form become unusable after the first submittion
+ * given my unfamiliarity with React I used ChatGPT to teach me what was wrong with my code.
  */
 
 
 const LoginForm = (props) => {
 
-	const loginData = {
+	const [loginData, setLoginData] = useState({
 		username: "",
 		password: ""
-	};
+	});
 
 	const handleSubmit = (event) =>{
 		event.preventDefault();
@@ -26,10 +29,12 @@ const LoginForm = (props) => {
 	}
 
 	const handleUsernameUpdate = (event) => {
-		loginData.username = event.target.value;
+		setLoginData({ ...loginData, username: event.target.value })
+		//loginData.username = event.target.value;
 	}
 	const handlePasswordUpdate = (event) => {
-		loginData.password = event.target.value;
+		setLoginData({ ...loginData, password: event.target.value })
+		//loginData.password = event.target.value;
 	}
 
 	return (
